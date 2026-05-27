@@ -65,9 +65,4 @@
         compatible = "zmk,soft-off-wakeup-sources";
         wakeup-sources = <&kscan0>;
     };
-
-    chosen {
-        zmk,bttery = &vbatt;
-    };
-
 };
