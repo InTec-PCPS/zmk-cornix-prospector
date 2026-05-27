@@ -196,10 +196,10 @@
             //               | GUI | ALT  | CTRL | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
 
             bindings = <
-&escape_and_eisu  &kp Q          &kp W         &kp E             &kp R                 &kp T                         &kp Y  &kp U        &kp I      &kp O      &kp P          &kp BACKSPACE
-&kp LCTRL         &kp A          &kp S         &kp D             &kp F                 &kp G                         &kp H  &kp J        &kp K      &kp L      &kp SEMICOLON  &kp COLON
-&kp LEFT_SHIFT    &kp Z          &kp X         &kp C             &kp V                 &kp B      &kp K_MUTE  &none  &kp N  &kp M        &kp COMMA  &kp DOT    &kp FSLH       &kp MINUS
-&kp TAB           &kp LEFT_ALT   &kp AT_SIGN   &kp LEFT_COMMAND  &mt LEFT_SHIFT LANG2  &kp SPACE                     &mo 2  &lt 1 LANG1  &kp ENTER  &kp CARET  &kp BACKSLASH  &kp TILDE
+&escape_and_eisu  &kp Q         &kp W        &kp E             &kp R                 &kp T                         &kp Y  &kp U        &kp I      &kp O      &kp P          &kp BACKSPACE
+&kp LCTRL         &kp A         &kp S        &kp D             &kp F                 &kp G                         &kp H  &kp J        &kp K      &kp L      &kp SEMICOLON  &kp COLON
+&kp LEFT_SHIFT    &kp Z         &kp X        &kp C             &kp V                 &kp B      &kp K_MUTE  &none  &kp N  &kp M        &kp COMMA  &kp DOT    &kp FSLH       &kp MINUS
+&kp TAB           &kp LEFT_ALT  &kp AT_SIGN  &kp LEFT_COMMAND  &mt LEFT_SHIFT LANG2  &kp SPACE                     &mo 2  &lt 1 LANG1  &kp ENTER  &kp CARET  &kp BACKSLASH  &kp TILDE
             >;
 
             sensor-bindings =
@@ -219,7 +219,7 @@
 
             bindings = <
 &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp HASH       &kp PIPE       &kp QUESTION     &kp SINGLE_QUOTE                   &kp LA(Y)        &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PLUS      &kp DOLLAR
-&kp LEFT_BRACE        &kp RIGHT_BRACE        &kp CARET      &kp AMPERSAND  &kp EXCLAMATION  &kp DOUBLE_QUOTES                  &kp LS(EQUAL)    &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp MINUS     &kp LA(Y)
+&kp LEFT_BRACE        &kp RIGHT_BRACE        &kp CARET      &kp AMPERSAND  &kp EXCLAMATION  &kp DOUBLE_QUOTES                  &kp EQUAL        &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp MINUS     &kp LA(Y)
 &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp BACKSLASH  &kp AT_SIGN    &kp UNDER        &kp GRAVE          &trans  &trans  &kp KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp ASTERISK  &kp COMMA
 &kp LESS_THAN         &kp GREATER_THAN       &none          &trans         &trans           &trans                             &trans           &trans           &trans           &kp PERCENT      &kp SLASH     &kp PERIOD
             >;
