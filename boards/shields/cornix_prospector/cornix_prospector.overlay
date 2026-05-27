@@ -1,5 +1,6 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #import "cornix-layouts.dtsi"
+#include "../../jzf/cornix/cornix_sensors.dtsi"
 
 / {
     chosen {
