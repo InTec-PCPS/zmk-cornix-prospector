@@ -222,6 +222,4 @@ firmware is not yet implemented. PRs welcome.
 - Cornix hardware: Jezail Funder
 - Prospector ZMK module: [carrefinho](https://github.com/carrefinho/prospector-zmk-module)
 - ZMK helpers: [urob](https://github.com/urob/zmk-helpers)
-
-The maintainer also contributes to [RMK](https://rmk.rs/) — give it a
-look if you want a Rust-based alternative to ZMK.
+- Upstream zmk-keyboard-cornix repo: [hitsmaxft](https://github.com/hitsmaxft/zmk-keyboard-cornix)
