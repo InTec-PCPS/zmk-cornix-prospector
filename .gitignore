@@ -7,3 +7,7 @@ result
 target
 
 firmware
+
+# west workspace and build workaround
+zmk_exts/
+/config2

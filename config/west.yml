@@ -10,6 +10,8 @@ manifest:
       url-base: https://github.com/urob
     - name: janpfischer
       url-base: https://github.com/janpfischer
+    - name: carrefinho
+      url-base: https://github.com/carrefinho
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -33,5 +35,8 @@ manifest:
     #  remote: janpfischer
     #  revision: main
     #  clone-depth: 1
+    - name: prospector-zmk-module
+      remote: carrefinho
+      revision: feat/new-status-screens
   self:
     path: config
