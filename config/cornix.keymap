@@ -197,8 +197,8 @@
 
             bindings = <
 &escape_and_eisu  &kp Q          &kp W         &kp E             &kp R                 &kp T                         &kp Y  &kp U        &kp I      &kp O      &kp P          &kp BACKSPACE
-&kp LCTRL         &hm_l LCTRL A  &hm_l LALT S  &hm_l LGUI D      &hm_shift_l LSHFT F   &kp G                         &kp H  &kp J        &kp K      &kp L      &kp SEMICOLON  &kp COLON
-&kp LEFT_SHIFT    &hm_l LGUI Z   &kp X         &kp C             &kp V                 &kp B      &kp K_MUTE  &none  &kp N  &kp M        &kp COMMA  &kp DOT    &kp FSLH       &kp MINUS
+&kp LCTRL         &kp A          &kp S         &kp D             &kp F                 &kp G                         &kp H  &kp J        &kp K      &kp L      &kp SEMICOLON  &kp COLON
+&kp LEFT_SHIFT    &kp Z          &kp X         &kp C             &kp V                 &kp B      &kp K_MUTE  &none  &kp N  &kp M        &kp COMMA  &kp DOT    &kp FSLH       &kp MINUS
 &kp TAB           &kp LEFT_ALT   &kp AT_SIGN   &kp LEFT_COMMAND  &mt LEFT_SHIFT LANG2  &kp SPACE                     &mo 2  &lt 1 LANG1  &kp ENTER  &kp CARET  &kp BACKSLASH  &kp TILDE
             >;
 
