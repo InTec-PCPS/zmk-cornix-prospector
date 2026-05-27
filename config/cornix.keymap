@@ -202,7 +202,9 @@
 &kp TAB           &kp LEFT_ALT   &kp AT_SIGN   &kp LEFT_COMMAND  &mt LEFT_SHIFT LANG2  &kp SPACE                     &mo 2  &lt 1 LANG1  &kp ENTER  &kp CARET  &kp BACKSLASH  &kp TILDE
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings =
+                <&inc_dec_kp C_VOL_UP C_VOL_DN>,
+                <&inc_dec_kp LA(TAB) LA(LS(TAB))>;
         };
 
         SignAndCalc {
