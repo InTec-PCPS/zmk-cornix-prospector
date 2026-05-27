@@ -6,11 +6,10 @@
 
 ### 开发板
 
-该项目包含三个主要的开发板定义：
+该项目包含两个主要的开发板定义：
 
-- **`cornix_left`**: Cornix 分体式键盘的左半部分，用于在不使用适配器配置的情况下构建固件。
+- **`cornix_left`**: Cornix 分体式键盘的左半部分。作为外围设备运行，与适配器（central）配对。
 - **`cornix_right`**: Cornix 分体式键盘的右半部分，用于分体式键盘设置中的从设备侧。
-- **`cornix_ph_left`**: 左半部分的替代开发板配置，专门设计用于适配器设置。
 
 ### 扩展板
 
@@ -201,23 +200,16 @@ west update
 编辑 `build.yaml` 文件，添加：
 
 > [!NOTE]
-> 1. 如果您使用（默认）无适配器的 cornix，请选择 "cornix_left"、"cornix_right" 和 "reset"。
-> 2. 如果您将 cornix 与适配器一起使用，请选择 "cornix_dongle"。"cornix_left_for_dongle"、"cornix_right" 和 "reset"。
-> 3. 添加 "cornix_indicator" 扩展板以启用 RGB led 灯。它消耗更多电量，使用风险自负。
+> 1. Cornix 默认与适配器一起使用。请选择 "cornix_dongle"、"cornix_left"、"cornix_right" 和 "reset"。
+> 2. 添加 "cornix_indicator" 扩展板以启用 RGB led 灯。它消耗更多电量，使用风险自负。
 
 ```yaml
 include:
-  # 使用带适配器的 cornix
   - board: nice_nano
     shield: cornix_dongle_adaptor cornix_dongle_eyelash dongle_display
     snippet: studio-rpc-usb-uart
     artifact-name: cornix_dongle
 
-  - board: cornix_ph_left
-    # shield: cornix_indicator
-    artifact-name: cornix_left_for_dongle
-
-  # 使用不带适配器的 cornix
   - board: cornix_left
     # shield: cornix_indicator
     artifact-name: cornix_left

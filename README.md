@@ -6,11 +6,10 @@ This repository contains the ZMK firmware configuration for the Cornix split key
 
 ### Boards
 
-The project includes three main board definitions:
+The project includes two main board definitions:
 
-- **`cornix_left`**: The left half of the Cornix split keyboard, used when building firmware without a dongle configuration.
-- **`cornix_right`**: The right half of the Cornix split keyboard, used for the slave side in split keyboard setup.
-- **`cornix_ph_left`**: Alternative left half board configuration, specifically designed for use with a dongle setup.
+- **`cornix_left`**: The left half of the Cornix split keyboard. Acts as a peripheral that pairs with a dongle (the dongle is the central).
+- **`cornix_right`**: The right half of the Cornix split keyboard, used as a peripheral in the split setup.
 
 ### Shields
 
@@ -206,23 +205,16 @@ west update
 Edit the `build.yaml` file, add:
 
 > [!NOTE]
-> 1. If you are using (default) cornix without dongle, choose "cornix_left", "cornix_right" and "reset".
-> 2. If you are using cornix with dongle, choose "cornix_dongle". "cornix_left_for_dongle", "cornix_right" and "reset".
-> 3. Add "cornix_indicator" shield to enable RGB led light. It consumes much more power, use at your own risk.
+> 1. Cornix is built to run with a dongle. Choose "cornix_dongle", "cornix_left", "cornix_right" and "reset".
+> 2. Add "cornix_indicator" shield to enable RGB led light. It consumes much more power, use at your own risk.
 
 ```yaml
 include:
-  # Use cornix with dongle
   - board: nice_nano
     shield: cornix_dongle_adaptor cornix_dongle_eyelash dongle_display
     snippet: studio-rpc-usb-uart
     artifact-name: cornix_dongle
 
-  - board: cornix_ph_left
-    # shield: cornix_indicator
-    artifact-name: cornix_left_for_dongle
-
-  # Use cornix without dongle
   - board: cornix_left
     # shield: cornix_indicator
     artifact-name: cornix_left
@@ -342,11 +334,7 @@ If you prefer to build this project locally without adding it as a dependency in
 
 3. **Build the firmware**:
    ```bash
-<<<<<<< HEAD
-   west build -b cornix_main_left
-=======
    west build -b cornix_left
->>>>>>> 16dcccb (migrate to zephyr4 , disable dongle screen)
    west build -b cornix_right
    ```
 

@@ -15,15 +15,11 @@
 include:
   - board: cornix_left
     # shield: cornix_indicator
-    artifact-name: cornix_left_default_nosd
-
-  - board: cornix_ph_left
-    # shield: cornix_indicator
-    artifact-name: cornix_left_for_dongle_nosd
+    artifact-name: cornix_left
 
   - board: cornix_right
     # shield: cornix_indicator
-    artifact-name: cornix_right_nosd
+    artifact-name: cornix_right
 
   - board: cornix_right
     shield: settings_reset
