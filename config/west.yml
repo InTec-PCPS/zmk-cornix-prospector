@@ -12,6 +12,8 @@ manifest:
       url-base: https://github.com/janpfischer
     - name: carrefinho
       url-base: https://github.com/carrefinho
+    - name: mjmjm0101
+      url-base: https://github.com/mjmjm0101
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -36,7 +38,7 @@ manifest:
     #  revision: main
     #  clone-depth: 1
     - name: prospector-zmk-module
-      remote: carrefinho
-      revision: feat/new-status-screens
+      remote: mjmjm0101
+      revision: cornix
   self:
     path: config
