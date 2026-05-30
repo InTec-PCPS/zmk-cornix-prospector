@@ -6,4 +6,19 @@
 
 /dts-v1/;
 #include "cornix_left_common.dtsi"
+
+/*
+ * Battery calibration (LEFT half). See README.md "Battery calibration".
+ * Nominal full-ohms is 2806000. Lower = reports lower %, higher = higher %.
+ *
+ * Current value: 2783000 (~-0.8% vs nominal).
+ * Why: at a simultaneous full charge the left half measured ~4.23 V while
+ * the right measured ~4.19 V, i.e. left read ~34 mV high and stuck at the
+ * 100% clamp. Trimming full-ohms down brings the left reading in line with
+ * the right so both track together instead of pinning at 100%.
+ */
+&vbatt {
+    full-ohms = <2783000>;
+};
+
 // vim: set ft=dts:

@@ -9,6 +9,25 @@
         zmk,battery = &vbatt;
     };
 
+    /*
+     * Battery voltage divider (per-half ADC sense).
+     *
+     * The reported battery percentage is computed ON EACH HALF from this
+     * ADC reading (voltage -> % happens in the peripheral firmware, never on
+     * the dongle), so any calibration MUST live in the keyboard-half firmware.
+     *
+     * `full-ohms` is the calibration knob:
+     *   - LOWER full-ohms  -> the half reports a LOWER voltage / lower %
+     *   - HIGHER full-ohms -> the half reports a HIGHER voltage / higher %
+     *
+     * The nominal hardware value is (2000000 + 806000) = 2806000.
+     * Per-half overrides live in the board files so left and right can be
+     * tuned independently:
+     *   - left : boards/jzf/cornix/cornix_left.dts
+     *   - right: boards/jzf/cornix/cornix_right.dts
+     * See the "Battery calibration" section in README.md for the procedure
+     * and the current per-half values.
+     */
     vbatt: vbatt {
         compatible = "zmk,battery-voltage-divider";
         io-channels = <&adc 3>;

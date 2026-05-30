@@ -93,6 +93,70 @@ you need to roll back to the stock RMK firmware or restore the
 SoftDevice, see [`bootloader/README.md`](./bootloader/README.md) and
 the backup files under `rmkfw/`.
 
+## Battery calibration
+
+The battery percentage is computed **on each keyboard half** from its own
+ADC voltage divider (voltage → % happens in the peripheral firmware via
+ZMK's lithium-ion curve). The dongle only receives the final, already
+clamped, integer percentage over BLE — it has no access to the raw
+voltage. **Calibration therefore cannot be done on the dongle; it must be
+done in the keyboard-half firmware, independently for left and right.**
+
+### Where the knobs live
+
+Each half has its own `full-ohms` value:
+
+| Half  | File                                          | Current value | Notes                              |
+| ----- | --------------------------------------------- | ------------- | ---------------------------------- |
+| Left  | `boards/jzf/cornix/cornix_left.dts`  | `2783000`     | ~-0.8% vs nominal (trimmed, see below) |
+| Right | `boards/jzf/cornix/cornix_right.dts` | `2806000`     | Nominal (reference half)               |
+
+Nominal hardware value: `2000000 + 806000 = 2806000` (`output-ohms` stays
+`2000000`). The shared default is defined in
+`boards/jzf/cornix/nrf_e73.dtsi`; the board files above override it.
+
+### How to adjust
+
+`full-ohms` scales the reported voltage linearly:
+
+- **Lower** `full-ohms` → the half reports a **lower** voltage / lower %.
+- **Higher** `full-ohms` → the half reports a **higher** voltage / higher %.
+
+To shift a half's reading by a known amount, scale `full-ohms` by the
+ratio of (desired mV / currently-reported mV) and rebuild + reflash that
+half. Example: reading is 34 mV too high at 4226 mV →
+`2806000 × (4192 / 4226) ≈ 2783000`.
+
+### Why left is trimmed
+
+At a simultaneous full charge the two halves measured:
+
+- Left  ≈ **4.23 V** (read ~34 mV / ~0.8% high → sat above the 4.20 V
+  clamp → stuck at 100%).
+- Right ≈ **4.19 V** (just below the clamp → tracked normally).
+
+Both cells are effectively full; the difference is within normal resistor
+/ charge-IC tolerance, but it was enough to pin the left half at 100%.
+Trimming the left `full-ohms` down ~0.8% aligns it with the right so both
+track together.
+
+### Re-measuring (diagnostic trick)
+
+ZMK clamps anything ≥ 4200 mV to 100%, which hides the real voltage near
+full charge. To turn the on-screen % into a coarse voltmeter, temporarily
+**lower** `full-ohms` in `nrf_e73.dtsi` (e.g. to `2500000`) so a full cell
+maps to ~3.74 V instead of clamping, rebuild both halves, read the two
+numbers off the dongle, then back out the voltage:
+
+```
+mv_reported = (pct + 459) * 7.5            # invert ZMK's curve
+v_adc       = mv_reported / (full / output)   # here full/output = 1.25
+v_battery   = v_adc * (2806000 / 2000000)     # nominal divider ratio
+```
+
+This is the method used to derive the values above. Revert the diagnostic
+change afterwards. (The `diag/battery-unclamp` branch keeps an example.)
+
 ## Customize and build via GitHub Actions
 
 Recommended path for keymap-only changes.

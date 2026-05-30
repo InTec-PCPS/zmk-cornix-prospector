@@ -63,4 +63,16 @@
     };
 };
 
+/*
+ * Battery calibration (RIGHT half). See README.md "Battery calibration".
+ * Nominal full-ohms is 2806000. Lower = reports lower %, higher = higher %.
+ *
+ * Current value: 2806000 (nominal, used as the reference half).
+ * The right half tracks plausibly (~4.19 V at full charge), so it is left at
+ * the nominal divider value. Adjust here if you want to trim the right half.
+ */
+&vbatt {
+    full-ohms = <2806000>;
+};
+
 //vim: set ft=dts
