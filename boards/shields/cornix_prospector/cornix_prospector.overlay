@@ -1,4 +1,5 @@
 #include <dt-bindings/zmk/matrix_transform.h>
+#include <dt-bindings/gpio/gpio.h>
 #import "cornix-layouts.dtsi"
 #include "../../jzf/cornix/cornix_sensors.dtsi"
 
@@ -29,5 +30,35 @@
             RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5) RC(2, 6) RC(1,13) RC(2,12)  RC(2,11) RC(2,10) RC(2,9) RC(2,8) RC(2,7)
             RC(3,0) RC(3,1) RC(3,2) RC(3,3) RC(3,4) RC(3,5)                   RC(3,12)  RC(3,11) RC(3,10) RC(3,9) RC(3,8) RC(3,7)
         >;
+    };
+};
+
+/* Waveshare 1.69" パネルの Hynitron CST816S 静電タッチ。
+ * 画面復帰専用に使う(ホストへのポインタ/HID 出力はしない)。
+ * APDS9960(0x39)と同じ i2c1 を共用。IRQ→XIAO D0(P0.02)、RST→XIAO D1(P0.03)。
+ * beekeeb 2025/11/17 以降の PCB で配線済み。 */
+&i2c1 {
+    status = "okay";
+
+    touch_sensor: cst816s@15 {
+        compatible = "hynitron,cst816s";
+        reg = <0x15>;
+        irq-gpios = <&gpio0 2 GPIO_ACTIVE_LOW>;
+        rst-gpios = <&gpio0 3 GPIO_ACTIVE_LOW>;
+    };
+};
+
+/* タッチを LVGL のポインタ入力に橋渡しし、画面上のボタンをタップ操作可能にする。
+ * 表示は ROTATED_270 なので、実機でタップ位置が表示とずれる場合は下の
+ * swap-xy / invert-x / invert-y を有効化して合わせる(組合せは実機で確認)。 */
+/ {
+    lvgl_pointer: lvgl_pointer {
+        compatible = "zephyr,lvgl-pointer-input";
+        input = <&touch_sensor>;
+        /* タッチは表示に対して 180° 回転していたため X/Y 両方を反転。
+         * (invert-y だけだと横方向が鏡像=「裏返り」になる) */
+        /* swap-xy; */
+        invert-x;
+        invert-y;
     };
 };

@@ -222,6 +222,31 @@ west build -s zmk/app -d ../.build/prospector_dongle \
 
 The resulting UF2 lands at `.build/<artifact>/zephyr/zmk.uf2`.
 
+### Incremental rebuild
+
+After the first `west build`, editing a `.conf`, `.overlay` or source
+file does **not** require a fresh `west build`. Re-run the build with
+CMake instead — it re-runs the devicetree / Kconfig generation and
+recompiles only what changed, which is much faster:
+
+```bash
+cd zmk_exts
+cmake --build ../.build/prospector_dongle
+```
+
+### macOS: git in the dev shell
+
+The Nix dev shell (`mkShellNoCC`) does **not** ship `git`, so it falls
+back to the Xcode `/usr/bin/git` stub. Under some shells that stub
+reports `error: tool 'git' not found`, which makes west fail with
+`cannot import contents of app/west.yml`. If you hit that, put the
+Command Line Tools git first on `PATH` before building:
+
+```bash
+export DEVELOPER_DIR=/Library/Developer/CommandLineTools
+export PATH="/Library/Developer/CommandLineTools/usr/bin:$PATH"
+```
+
 A `Justfile` is also included for the repo author's own workflow, but
 the raw `west build` commands above are the source of truth and what
 CI ends up running.
